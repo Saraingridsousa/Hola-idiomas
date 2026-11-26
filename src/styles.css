@@ -105,3 +105,10 @@
 .story-loop .story-card{scroll-snap-align:none}
 .story-track.story-loop.is-dragging{cursor:grabbing}
 .story-loop .story-card{pointer-events:none}
+
+/* Transform-based marquee: independent of native scroll and hover state. */
+.story-viewport{overflow:hidden;position:relative;cursor:grab;touch-action:pan-y pinch-zoom;user-select:none;-webkit-user-select:none;padding:4px 0 12px;min-width:0}
+.story-viewport.is-dragging{cursor:grabbing}
+.story-viewport:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:8px}
+.story-rail{display:flex;position:relative;gap:16px;width:100%;will-change:transform}
+.story-rail .story-card{scroll-snap-align:none;pointer-events:none}
