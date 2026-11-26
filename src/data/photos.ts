@@ -13,7 +13,9 @@ export const photos = {
  teacherIt: { id:9533892, alt:'Retrato ilustrativo de um homem sorrindo', source:'https://www.pexels.com/photo/a-portrait-of-a-smiling-man-9533892/' },
 } as const;
 export type PhotoKey = keyof typeof photos;
-export function photoUrl(photo: PhotoKey, width: number) {
+export function remotePhotoUrl(photo: PhotoKey, width: number) {
  const id = photos[photo].id;
  return 'https://images.pexels.com/photos/'+id+'/pexels-photo-'+id+'.jpeg?auto=compress&cs=tinysrgb&w='+width;
 }
+
+export function photoUrl(photo:PhotoKey,width:480|960){return import.meta.env.BASE_URL+'images/'+photo+'-'+width+'.webp'}
