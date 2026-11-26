@@ -11,6 +11,7 @@ import { LearningExperiences } from './components/LearningExperiences';
 import { Testimonials } from './components/Testimonials';
 import { Challenge } from './components/Challenge';
 import { Teachers } from './components/Teachers';
+import { Faq } from './components/Faq';
 import type { Profile } from './lib/recommendation';
 import type { PlacementResult } from './lib/journey';
 
@@ -18,13 +19,6 @@ const methods = [
   { number:'01', icon:MessagesSquare, title:'Fale desde o início.', description:'Situações reais, conversas guiadas e confiança para se expressar.' },
   { number:'02', icon:Compass, title:'Aprenda com propósito.', description:'Atividades conectadas aos seus interesses, da viagem à carreira.' },
   { number:'03', icon:GraduationCap, title:'Evolua no seu ritmo.', description:'Uma jornada em etapas, com prática e feedback para continuar.' },
-];
-const faqs = [
-  ['Preciso saber alguma coisa antes de começar?', 'Não. A proposta inclui cursos para iniciantes e para quem já tem experiência.'],
-  ['Quais idades podem participar?', 'A escola foi idealizada para crianças, adolescentes, adultos e pessoas com 60 anos ou mais.'],
-  ['Como funcionam as modalidades?', 'O catálogo apresenta aulas online, presenciais e particulares como opções demonstrativas.'],
-  ['O teste de nível é uma certificação?', 'Não. É uma atividade educativa e uma estimativa inicial, sem validade oficial.'],
-  ['Posso agendar uma aula real?', 'Não. A ¡Hola! Idiomas é uma escola fictícia criada para demonstrar uma experiência digital.'],
 ];
 export default function App() {
   const [menu, setMenu] = useState(false);
@@ -60,8 +54,8 @@ export default function App() {
       <Testimonials/>
       <PlacementQuiz preferredLanguage={language} onLanguageChange={setLanguage} onResult={setPlacement}/>
       <TrialBooking language={language} onLanguageChange={setLanguage} mode={modality} onModeChange={setModality} placement={placement}/>
-      <section className="wrap section faq" id="faq"><div><div className="eyebrow">07 / PERGUNTAS FREQUENTES</div><h2>Ainda ficou<br/>alguma dúvida?</h2></div><div>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></section>
+      <Faq/>
     </main>
-    <footer><div className="wrap footer-inner"><div><a className="brand" href="#inicio"><span>¡hola!</span><small>IDIOMAS</small></a><p>Toda conexão começa com um olá.</p></div><div><Globe2 size={23}/><p>Projeto fictício de portfólio. Sem aulas, matrículas ou reservas reais.</p></div><a href="#inicio">Voltar ao topo ↑</a></div></footer>
+    <footer><div className="wrap footer-inner"><div><a className="brand" href="#inicio"><span>¡hola!</span><small>IDIOMAS</small></a><p>Toda conexão começa com um olá.</p></div><div><Globe2 size={23}/><p>Projeto fictício de portfólio. Sem aulas, matrículas ou reservas reais.</p></div><div className="footer-links"><a href="#inicio">Voltar ao topo ↑</a><a href="#professores">Professores</a><a href="#faq">Dúvidas frequentes</a><a href="https://github.com/Saraingridsousa/Hola-idiomas" target="_blank" rel="noopener noreferrer">Código do projeto <ArrowUpRight size={14}/></a></div></div></footer>
   </>;
 }
