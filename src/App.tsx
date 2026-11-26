@@ -11,6 +11,7 @@ import { LearningExperiences } from './components/LearningExperiences';
 import { Testimonials } from './components/Testimonials';
 import { Challenge } from './components/Challenge';
 import type { Profile } from './lib/recommendation';
+import type { PlacementResult } from './lib/journey';
 
 const methods = [
   { number:'01', icon:MessagesSquare, title:'Fale desde o início.', description:'Situações reais, conversas guiadas e confiança para se expressar.' },
@@ -29,6 +30,8 @@ export default function App() {
   const reduced = useReducedMotion();
   const [language, setLanguage] = useState<LanguageId>('en');
   const [audience, setAudience] = useState<Profile['audience']>('Adultos');
+  const [modality,setModality]=useState<Profile['modality']>('Online');
+  const [placement,setPlacement]=useState<PlacementResult|null>(null);
   return <>
     <a className="skip" href="#main">Ir para o conteúdo</a>
     <header className="header"><div className="wrap nav">
@@ -47,14 +50,14 @@ export default function App() {
         <div className="language-grid">{languages.map((l,i)=><motion.article initial={reduced?false:{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}} transition={{duration:.4,delay:reduced?0:i*.07}} className="language-card" key={l.id} style={{background:l.accent}}><span className="language-code">{l.symbol} /</span><div className="greeting">{l.greeting}</div><h3>{l.name}</h3><p>{l.description}</p><a href="#recomendacao" onClick={()=>setLanguage(l.id)} className="round-link" aria-label={'Conhecer curso de '+l.name}><ArrowUpRight/></a></motion.article>)}</div>
       </section>
       <AudienceCards onChoose={setAudience}/>
-      <CourseFinder language={language} onLanguageChange={setLanguage} audience={audience} onAudienceChange={setAudience}/>
+      <CourseFinder language={language} onLanguageChange={setLanguage} audience={audience} onAudienceChange={setAudience} modality={modality} onModalityChange={setModality}/>
       <LearningExperiences/>
       <section className="wrap section" id="metodo"><div className="section-head"><div><div className="eyebrow">03 / NOSSA METODOLOGIA</div><h2>Menos decoreba.<br/>Mais conversa<span className="accent">.</span></h2></div><p>O idioma ganha sentido quando faz parte da sua vida.</p></div><div className="method-grid">{methods.map((m,i)=><motion.article initial={reduced?false:{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}} transition={{duration:.4,delay:reduced?0:i*.08}} className="method-card" key={m.number}><div className="method-top"><m.icon size={31}/><span>{m.number}</span></div><h3>{m.title}</h3><p>{m.description}</p></motion.article>)}</div></section>
       <section className="wrap section" id="modalidades"><div className="section-head"><div><div className="eyebrow">04 / DO SEU JEITO</div><h2>O mundo cabe<br/>na sua rotina.</h2></div></div><div className="modality-grid">{[{icon:Laptop,title:'Online',text:'Aprenda de onde estiver.'},{icon:Users,title:'Presencial',text:'Conexões em sala de aula.'},{icon:BookOpen,title:'Particular',text:'Atenção individual ao seu objetivo.'}].map(m=><article key={m.title}><m.icon size={30}/><h3>{m.title}</h3><p>{m.text}</p></article>)}</div></section>
-      <Challenge/>
+      <Challenge preferredLanguage={language} onLanguageChange={setLanguage}/>
       <Testimonials/>
-      <PlacementQuiz/>
-      <TrialBooking/>
+      <PlacementQuiz preferredLanguage={language} onLanguageChange={setLanguage} onResult={setPlacement}/>
+      <TrialBooking language={language} onLanguageChange={setLanguage} mode={modality} onModeChange={setModality} placement={placement}/>
       <section className="wrap section faq" id="faq"><div><div className="eyebrow">07 / PERGUNTAS FREQUENTES</div><h2>Ainda ficou<br/>alguma dúvida?</h2></div><div>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></section>
     </main>
     <footer><div className="wrap footer-inner"><div><a className="brand" href="#inicio"><span>¡hola!</span><small>IDIOMAS</small></a><p>Toda conexão começa com um olá.</p></div><div><Globe2 size={23}/><p>Projeto fictício de portfólio. Sem aulas, matrículas ou reservas reais.</p></div><a href="#inicio">Voltar ao topo ↑</a></div></footer>

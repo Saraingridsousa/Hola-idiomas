@@ -4,9 +4,8 @@ import { ArrowRight, Check, Compass } from 'lucide-react';
 import { languages, audiences, modalities, type LanguageId } from '../data/courses';
 import { goals, recommendCourse, type Profile } from '../lib/recommendation';
 
-export function CourseFinder({language, onLanguageChange, audience, onAudienceChange}: {language: LanguageId; onLanguageChange: (id: LanguageId) => void; audience: Profile['audience']; onAudienceChange: (audience: Profile['audience']) => void}) {
+export function CourseFinder({language, onLanguageChange, audience, onAudienceChange, modality, onModalityChange}: {language: LanguageId; onLanguageChange: (id: LanguageId) => void; audience: Profile['audience']; onAudienceChange: (audience: Profile['audience']) => void; modality:Profile['modality']; onModalityChange:(mode:Profile['modality'])=>void}) {
   const [goal,setGoal]=useState<Profile['goal']>('Conversação');
-  const [modality,setModality]=useState<Profile['modality']>('Online');
   const [submitted,setSubmitted]=useState<Profile|null>(null);
   const result=submitted?recommendCourse(submitted):null;
   const current = submitted && submitted.language===language && submitted.audience===audience && submitted.goal===goal && submitted.modality===modality;
@@ -18,10 +17,10 @@ export function CourseFinder({language, onLanguageChange, audience, onAudienceCh
           <StyledSelect label="01. Qual idioma?" value={language} onChange={onLanguageChange} options={languages.map(l=>({value:l.id,label:l.name,tag:l.symbol,accent:l.accent}))}/>
           <StyledSelect label="02. Para quem?" value={audience} onChange={onAudienceChange} options={textChoices(audiences)}/>
           <StyledSelect label="03. Seu objetivo" value={goal} onChange={setGoal} options={textChoices(goals)}/>
-          <StyledSelect label="04. Como estudar?" value={modality} onChange={setModality} options={textChoices(modalities)}/>
+          <StyledSelect label="04. Como estudar?" value={modality} onChange={onModalityChange} options={textChoices(modalities)}/>
         </div>
         <button className="btn primary w-full" type="submit">Descobrir meu curso <ArrowRight size={19}/></button>
-        <div aria-live="polite">{current && result && <div className="recommendation" style={{background:result.accent}}><span className="result-label"><Check size={16}/> SUA TRILHA SUGERIDA</span><h3>{result.title}</h3><p>{result.description} Modalidade: {result.modality}.</p><a href="#nivelamento">Descobrir meu nível <ArrowRight size={16}/></a></div>}</div>
+        <div aria-live="polite">{current && result && <div className="recommendation" style={{background:result.accent}}><span className="result-label"><Check size={16}/> SUA TRILHA SUGERIDA</span><h3>{result.title}</h3><p>{result.description} Modalidade: {result.modality}.</p><div className="journey-links"><a href="#nivelamento">Descobrir meu nível <ArrowRight size={16}/></a><a href="#experimental">Experimentar uma aula <ArrowRight size={16}/></a></div></div>}</div>
       </form>
     </div>
   </section>;

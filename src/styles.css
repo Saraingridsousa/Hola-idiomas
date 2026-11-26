@@ -112,3 +112,5 @@
 .story-viewport:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:8px}
 .story-rail{display:flex;position:relative;gap:16px;width:100%;will-change:transform}
 .story-rail .story-card{scroll-snap-align:none;pointer-events:none}
+
+.journey-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}.journey-links a{display:inline-flex;align-items:center;gap:5px;font-size:.84rem;font-weight:800;color:var(--blue);text-decoration:underline;text-underline-offset:3px}.journey-level{font-size:.82rem;background:#dbe3ff;padding:10px 12px;border-radius:8px;margin-top:12px}.challenge-result .journey-links{justify-content:center}
