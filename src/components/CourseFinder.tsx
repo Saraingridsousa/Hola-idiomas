@@ -4,8 +4,7 @@ import { ArrowRight, Check, Compass } from 'lucide-react';
 import { languages, audiences, modalities, type LanguageId } from '../data/courses';
 import { goals, recommendCourse, type Profile } from '../lib/recommendation';
 
-export function CourseFinder({language, onLanguageChange}: {language: LanguageId; onLanguageChange: (id: LanguageId) => void}) {
-  const [audience,setAudience]=useState<Profile['audience']>('Adultos');
+export function CourseFinder({language, onLanguageChange, audience, onAudienceChange}: {language: LanguageId; onLanguageChange: (id: LanguageId) => void; audience: Profile['audience']; onAudienceChange: (audience: Profile['audience']) => void}) {
   const [goal,setGoal]=useState<Profile['goal']>('Conversação');
   const [modality,setModality]=useState<Profile['modality']>('Online');
   const [submitted,setSubmitted]=useState<Profile|null>(null);
@@ -17,7 +16,7 @@ export function CourseFinder({language, onLanguageChange}: {language: LanguageId
       <form className="finder-form" onSubmit={e=>{e.preventDefault();setSubmitted({language,audience,goal,modality})}}>
         <div className="finder-fields">
           <StyledSelect label="01. Qual idioma?" value={language} onChange={onLanguageChange} options={languages.map(l=>({value:l.id,label:l.name,tag:l.symbol,accent:l.accent}))}/>
-          <StyledSelect label="02. Para quem?" value={audience} onChange={setAudience} options={textChoices(audiences)}/>
+          <StyledSelect label="02. Para quem?" value={audience} onChange={onAudienceChange} options={textChoices(audiences)}/>
           <StyledSelect label="03. Seu objetivo" value={goal} onChange={setGoal} options={textChoices(goals)}/>
           <StyledSelect label="04. Como estudar?" value={modality} onChange={setModality} options={textChoices(modalities)}/>
         </div>
