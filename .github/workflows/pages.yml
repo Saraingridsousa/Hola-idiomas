@@ -19,8 +19,33 @@ jobs:
         with:
           node-version: 22
       - run: npm install
+      - uses: actions/cache@v4
+        with:
+          path: public/images
+          key: hola-images-${{ hashFiles('scripts/photos.json', 'scripts/prepare-assets.mjs') }}
       - run: npm test
       - run: npm run build
+      - name: Install browser for smoke tests
+        run: npx playwright install --with-deps chromium
+      - name: Test responsive journeys and capture previews
+        run: npm run test:e2e
+      - name: Lighthouse audit (report only)
+        continue-on-error: true
+        run: |
+          mkdir -p reports
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/hola-preview.log 2>&1 &
+          for i in {1..20}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && break; sleep 1; done
+          export CHROME_PATH="$(node -e "console.log(require('playwright').chromium.executablePath())")"
+          npx lighthouse http://127.0.0.1:4173/ --chrome-flags="--headless --no-sandbox" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=reports/lighthouse.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quality-reports
+          path: |
+            reports/
+            test-results/
+            dist/screenshots/
+          if-no-files-found: ignore
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
