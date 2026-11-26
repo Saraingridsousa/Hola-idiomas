@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight, ArrowRight, Menu, X, MessagesSquare, Compass, GraduationCap, Globe2, Laptop, Users, BookOpen, Sparkles } from 'lucide-react';
 import { Hero } from './components/Hero';
 import { languages, type LanguageId } from './data/courses';
@@ -25,6 +26,7 @@ const faqs = [
 ];
 export default function App() {
   const [menu, setMenu] = useState(false);
+  const reduced = useReducedMotion();
   const [language, setLanguage] = useState<LanguageId>('en');
   const [audience, setAudience] = useState<Profile['audience']>('Adultos');
   return <>
@@ -33,7 +35,7 @@ export default function App() {
       <a href="#inicio" className="brand" aria-label="Hola Idiomas, início"><span>¡hola<span className="brand-accent">!</span></span><small>IDIOMAS</small></a>
       <button className="mobile-menu" aria-label={menu?'Fechar menu':'Abrir menu'} aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button>
       <nav className={menu?'navlinks open':'navlinks'} aria-label="Principal">
-        <a href="#idiomas" onClick={()=>setMenu(false)}>Idiomas</a><a href="#metodo" onClick={()=>setMenu(false)}>Metodologia</a><a href="#modalidades" onClick={()=>setMenu(false)}>Modalidades</a><a href="#nivelamento" onClick={()=>setMenu(false)}>Nivelamento</a>
+        <a href="#idiomas" onClick={()=>setMenu(false)}>Idiomas</a><a href="#metodo" onClick={()=>setMenu(false)}>Metodologia</a><a href="#modalidades" onClick={()=>setMenu(false)}>Modalidades</a><a href="#desafio" onClick={()=>setMenu(false)}>Desafio</a><a href="#nivelamento" onClick={()=>setMenu(false)}>Nivelamento</a>
         <a className="btn small primary" href="#experimental" onClick={()=>setMenu(false)}>Aula experimental <ArrowUpRight size={16}/></a>
       </nav>
     </div></header>
@@ -42,12 +44,12 @@ export default function App() {
       <div className="language-band" aria-hidden="true"><div className="band-track">{[0,1].map(i=><div key={i} className="band-group"><span>Hello!</span><Sparkles/><span>¡Hola!</span><Sparkles/><span>Bonjour!</span><Sparkles/><span>Ciao!</span><Sparkles/><span>Let's talk.</span><Sparkles/></div>)}</div></div>
       <section className="wrap section" id="idiomas">
         <div className="section-head"><div><div className="eyebrow">01 / ESCOLHA SUA PRÓXIMA PALAVRA</div><h2>Qual idioma<br/>é a sua cara<span className="accent">?</span></h2></div><p>Quatro maneiras de conhecer o mundo. Escolha a que faz sentido para sua história.</p></div>
-        <div className="language-grid">{languages.map(l=><article className="language-card" key={l.id} style={{background:l.accent}}><span className="language-code">{l.symbol} /</span><div className="greeting">{l.greeting}</div><h3>{l.name}</h3><p>{l.description}</p><a href="#recomendacao" onClick={()=>setLanguage(l.id)} className="round-link" aria-label={'Conhecer curso de '+l.name}><ArrowUpRight/></a></article>)}</div>
+        <div className="language-grid">{languages.map((l,i)=><motion.article initial={reduced?false:{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}} transition={{duration:.4,delay:reduced?0:i*.07}} className="language-card" key={l.id} style={{background:l.accent}}><span className="language-code">{l.symbol} /</span><div className="greeting">{l.greeting}</div><h3>{l.name}</h3><p>{l.description}</p><a href="#recomendacao" onClick={()=>setLanguage(l.id)} className="round-link" aria-label={'Conhecer curso de '+l.name}><ArrowUpRight/></a></motion.article>)}</div>
       </section>
       <AudienceCards onChoose={setAudience}/>
       <CourseFinder language={language} onLanguageChange={setLanguage} audience={audience} onAudienceChange={setAudience}/>
       <LearningExperiences/>
-      <section className="wrap section" id="metodo"><div className="section-head"><div><div className="eyebrow">03 / NOSSA METODOLOGIA</div><h2>Menos decoreba.<br/>Mais conversa<span className="accent">.</span></h2></div><p>O idioma ganha sentido quando faz parte da sua vida.</p></div><div className="method-grid">{methods.map(m=><article className="method-card" key={m.number}><div className="method-top"><m.icon size={31}/><span>{m.number}</span></div><h3>{m.title}</h3><p>{m.description}</p></article>)}</div></section>
+      <section className="wrap section" id="metodo"><div className="section-head"><div><div className="eyebrow">03 / NOSSA METODOLOGIA</div><h2>Menos decoreba.<br/>Mais conversa<span className="accent">.</span></h2></div><p>O idioma ganha sentido quando faz parte da sua vida.</p></div><div className="method-grid">{methods.map((m,i)=><motion.article initial={reduced?false:{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}} transition={{duration:.4,delay:reduced?0:i*.08}} className="method-card" key={m.number}><div className="method-top"><m.icon size={31}/><span>{m.number}</span></div><h3>{m.title}</h3><p>{m.description}</p></motion.article>)}</div></section>
       <section className="wrap section" id="modalidades"><div className="section-head"><div><div className="eyebrow">04 / DO SEU JEITO</div><h2>O mundo cabe<br/>na sua rotina.</h2></div></div><div className="modality-grid">{[{icon:Laptop,title:'Online',text:'Aprenda de onde estiver.'},{icon:Users,title:'Presencial',text:'Conexões em sala de aula.'},{icon:BookOpen,title:'Particular',text:'Atenção individual ao seu objetivo.'}].map(m=><article key={m.title}><m.icon size={30}/><h3>{m.title}</h3><p>{m.text}</p></article>)}</div></section>
       <Challenge/>
       <Testimonials/>

@@ -5,13 +5,13 @@ import { motion, useReducedMotion } from 'motion/react';
 export function Hero() {
   const reduced = useReducedMotion();
   return <section className="hero wrap" id="inicio">
-    <div className="hero-copy">
+    <motion.div className="hero-copy" initial={reduced?false:{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:.5}}>
       <div className="eyebrow"><span className="dot"/> IDIOMAS PARA A VIDA REAL</div>
       <h1>O mundo começa<br/>com um <em>olá<span>.</span></em></h1>
       <p>Aprenda a falar, não só a traduzir. Descubra novos idiomas, culturas e possibilidades — do seu jeito, em qualquer idade.</p>
       <div className="actions"><a className="btn primary" href="#idiomas">Encontre seu curso <ArrowUpRight size={19}/></a><a className="btn text-btn" href="#nivelamento"><span className="play"><Play size={15} fill="currentColor"/></span> Teste seu nível</a></div>
       <div className="hero-note"><Globe2 size={18}/> Quatro idiomas. Inúmeras conexões.</div>
-    </div>
+    </motion.div>
     <motion.div className="hero-art" initial={reduced?false:{opacity:0,y:18}} animate={{opacity:1,y:0}} transition={{duration:.6}} aria-hidden="true">
       <div className="art-grid"/><div className="art-orbit orbit-one"/><div className="art-orbit orbit-two"/>
       <div className="art-label">01 / A CONVERSA É SÓ O COMEÇO</div>
