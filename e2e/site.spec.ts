@@ -39,9 +39,10 @@ test('carousel moves automatically without a pause button',async({page})=>{
  await page.emulateMedia({reducedMotion:'no-preference'});
  await page.goto('/');
  const rail=page.locator('.story-rail');
- await rail.scrollIntoViewIfNeeded();
+ await page.locator('#historias').evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));
+ await expect(page.locator('.story-viewport')).toBeVisible();
  const initial=await rail.evaluate(el=>getComputedStyle(el).transform);
- await expect.poll(()=>rail.evaluate(el=>getComputedStyle(el).transform)).not.toBe(initial);
+ await expect.poll(()=>rail.evaluate(el=>getComputedStyle(el).transform),{timeout:5000}).not.toBe(initial);
  await expect(page.locator('#historias').getByRole('button')).toHaveCount(2);
 });
 for(const width of [390,768,1440]){

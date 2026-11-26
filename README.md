@@ -68,7 +68,7 @@ Fotografias de uso gratuito da [Pexels](https://www.pexels.com/license/), com li
 
 ## Publicação
 
-O Vite gera os arquivos estáticos em `dist/`. O GitHub Actions compila, testa e publica o artefato automaticamente. Metadados Open Graph, Twitter Card, URL canônica e sitemap acompanham a versão publicada. O caminho base é relativo para permitir hospedagem em subdiretórios.
+O Vite gera os arquivos estáticos em `dist/`. O GitHub Actions compila, testa e publica o artefato automaticamente. Em Settings → Pages → Build and deployment, mantenha Source como **GitHub Actions**, não Deploy from a branch: o código-fonte TSX não pode ser publicado diretamente pelo Jekyll. Metadados Open Graph, Twitter Card, URL canônica e sitemap acompanham a versão publicada. O caminho base é relativo para permitir hospedagem em subdiretórios.
 
 ## Limites da demonstração
 
