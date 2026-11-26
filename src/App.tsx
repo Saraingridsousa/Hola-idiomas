@@ -3,6 +3,7 @@ import { ArrowUpRight, ArrowRight, Menu, X, MessagesSquare, Compass, GraduationC
 import { Hero } from './components/Hero';
 import { languages, type LanguageId } from './data/courses';
 import { CourseFinder } from './components/CourseFinder';
+import { PlacementQuiz } from './components/PlacementQuiz';
 
 const methods = [
   { number:'01', icon:MessagesSquare, title:'Fale desde o início.', description:'Situações reais, conversas guiadas e confiança para se expressar.' },
@@ -40,7 +41,7 @@ export default function App() {
       <section className="wrap section" id="perfil"><div className="profile-banner"><div><div className="eyebrow">02 / PARA CADA FASE DA VIDA</div><h2>Seu ritmo.<br/>Sua história.</h2><p>Não existe uma idade certa para aprender. Existe a vontade de começar.</p></div><div className="profile-tiles">{['Kids · 6–11','Teens · 12–17','Adults · 18+','Conexões · 60+'].map((a,i)=><div className="profile-tile" key={a}><span>0{i+1}</span>{a}<ArrowRight size={17}/></div>)}</div></div></section>
       <section className="wrap section" id="metodo"><div className="section-head"><div><div className="eyebrow">03 / NOSSA METODOLOGIA</div><h2>Menos decoreba.<br/>Mais conversa<span className="accent">.</span></h2></div><p>O idioma ganha sentido quando faz parte da sua vida.</p></div><div className="method-grid">{methods.map(m=><article className="method-card" key={m.number}><div className="method-top"><m.icon size={31}/><span>{m.number}</span></div><h3>{m.title}</h3><p>{m.description}</p></article>)}</div></section>
       <section className="wrap section" id="modalidades"><div className="section-head"><div><div className="eyebrow">04 / DO SEU JEITO</div><h2>O mundo cabe<br/>na sua rotina.</h2></div></div><div className="modality-grid">{[{icon:Laptop,title:'Online',text:'Aprenda de onde estiver.'},{icon:Users,title:'Presencial',text:'Conexões em sala de aula.'},{icon:BookOpen,title:'Particular',text:'Atenção individual ao seu objetivo.'}].map(m=><article key={m.title}><m.icon size={30}/><h3>{m.title}</h3><p>{m.text}</p></article>)}</div></section>
-      <section className="wrap section" id="nivelamento"><div className="cta-panel"><div><div className="eyebrow">05 / DESCUBRA SEU PONTO DE PARTIDA</div><h2>Qual é o seu nível?</h2><p>Uma experiência rápida para conhecer seu ponto de partida. Em desenvolvimento.</p></div><a className="btn yellow" href="#experimental">Comece sua jornada <ArrowUpRight/></a></div></section>
+      <PlacementQuiz/>
       <section className="wrap section" id="experimental"><div className="section-head"><div><div className="eyebrow">06 / PRIMEIRO PASSO</div><h2>Vamos conversar<span className="accent">?</span></h2></div><p>Em breve, uma simulação de aula experimental para experimentar a jornada de um aluno.</p></div><div className="demo-note"><CalendarDays/> Projeto demonstrativo — não realizamos reservas reais.</div></section>
       <section className="wrap section faq" id="faq"><div><div className="eyebrow">07 / PERGUNTAS FREQUENTES</div><h2>Ainda ficou<br/>alguma dúvida?</h2></div><div>{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></section>
     </main>
