@@ -98,3 +98,10 @@
 @media(min-width:721px) and (max-width:1050px){.navlinks{gap:12px;font-size:.79rem}.navlinks .small{padding:8px 10px;font-size:.75rem}}
 @media(min-width:721px) and (max-width:850px){.navlinks{gap:9px;font-size:.74rem}.nav{gap:12px}}
 @media(prefers-reduced-motion:reduce){.btn:hover svg,.audience-link:hover svg,.experience-cta:hover svg{translate:none}.audience-card:hover img,.experience-card:hover img{transform:none}}
+
+/* Continuous testimonials: seamless loop, manual drag and touch scroll. */
+.story-track.story-loop{position:relative;scroll-snap-type:none;scroll-behavior:auto;scrollbar-width:none;cursor:grab;overscroll-behavior-x:contain;user-select:none;-webkit-user-select:none}
+.story-track.story-loop::-webkit-scrollbar{display:none}
+.story-loop .story-card{scroll-snap-align:none}
+.story-track.story-loop.is-dragging{cursor:grabbing}
+.story-loop .story-card{pointer-events:none}
