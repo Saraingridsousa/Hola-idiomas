@@ -7,6 +7,10 @@ export const photos = {
  group: { id:8423407, alt:'Estudantes conversando durante atividade colaborativa', source:'https://www.pexels.com/photo/a-students-talking-together-in-classroom-8423407/' },
  online: { id:4126709, alt:'Mulher conversando por vídeo com fones de ouvido', source:'https://www.pexels.com/photo/positive-woman-in-headphones-having-video-call-4126709/' },
  culture: { id:6238046, alt:'Grupo de estudantes compartilhando ideias e materiais', source:'https://www.pexels.com/photo/diverse-students-doing-homework-together-in-classroom-6238046/' },
+ teacherEn: { id:29934077, alt:'Retrato ilustrativo de uma mulher sorrindo', source:'https://www.pexels.com/photo/confident-woman-smiling-in-professional-portrait-29934077/' },
+ teacherEs: { id:8618069, alt:'Retrato ilustrativo de um homem em sala de aula', source:'https://www.pexels.com/photo/a-happy-man-in-a-classroom-8618069/' },
+ teacherFr: { id:30712828, alt:'Retrato ilustrativo de uma mulher sorrindo', source:'https://www.pexels.com/photo/professional-female-portrait-in-casual-attire-30712828/' },
+ teacherIt: { id:9533892, alt:'Retrato ilustrativo de um homem sorrindo', source:'https://www.pexels.com/photo/a-portrait-of-a-smiling-man-9533892/' },
 } as const;
 export type PhotoKey = keyof typeof photos;
 export function photoUrl(photo: PhotoKey, width: number) {

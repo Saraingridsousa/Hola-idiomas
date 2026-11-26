@@ -10,6 +10,7 @@ import { AudienceCards } from './components/AudienceCards';
 import { LearningExperiences } from './components/LearningExperiences';
 import { Testimonials } from './components/Testimonials';
 import { Challenge } from './components/Challenge';
+import { Teachers } from './components/Teachers';
 import type { Profile } from './lib/recommendation';
 import type { PlacementResult } from './lib/journey';
 
@@ -54,6 +55,7 @@ export default function App() {
       <LearningExperiences/>
       <section className="wrap section" id="metodo"><div className="section-head"><div><div className="eyebrow">03 / NOSSA METODOLOGIA</div><h2>Menos decoreba.<br/>Mais conversa<span className="accent">.</span></h2></div><p>O idioma ganha sentido quando faz parte da sua vida.</p></div><div className="method-grid">{methods.map((m,i)=><motion.article initial={reduced?false:{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.15}} transition={{duration:.4,delay:reduced?0:i*.08}} className="method-card" key={m.number}><div className="method-top"><m.icon size={31}/><span>{m.number}</span></div><h3>{m.title}</h3><p>{m.description}</p></motion.article>)}</div></section>
       <section className="wrap section" id="modalidades"><div className="section-head"><div><div className="eyebrow">04 / DO SEU JEITO</div><h2>O mundo cabe<br/>na sua rotina.</h2></div></div><div className="modality-grid">{[{icon:Laptop,title:'Online',text:'Aprenda de onde estiver.'},{icon:Users,title:'Presencial',text:'Conexões em sala de aula.'},{icon:BookOpen,title:'Particular',text:'Atenção individual ao seu objetivo.'}].map(m=><article key={m.title}><m.icon size={30}/><h3>{m.title}</h3><p>{m.text}</p></article>)}</div></section>
+      <Teachers onChoose={setLanguage}/>
       <Challenge preferredLanguage={language} onLanguageChange={setLanguage}/>
       <Testimonials/>
       <PlacementQuiz preferredLanguage={language} onLanguageChange={setLanguage} onResult={setPlacement}/>
