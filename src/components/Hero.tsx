@@ -1,4 +1,5 @@
 import { ArrowUpRight, Globe2, MessageCircle, Sparkles, Play } from 'lucide-react';
+import { EditorialPhoto } from './EditorialPhoto';
 import { motion, useReducedMotion } from 'motion/react';
 
 export function Hero() {
@@ -38,6 +39,7 @@ export function Hero() {
         </g>
         <g fill="none" stroke="#18233e" strokeWidth="3" strokeLinecap="round"><path d="M57 123v24m-12-12h24M416 219v24m-12-12h24"/><path d="M392 58l15 15m0-15-15 15"/></g>
       </svg>
+      <div className="hero-photo"><EditorialPhoto photo="hero" priority /></div>
       <div className="speech speech-one"><MessageCircle size={18}/> Hello!</div>
       <div className="speech speech-two">¡Hola! <Sparkles size={17}/></div>
       <div className="speech speech-three">Bonjour.</div>
